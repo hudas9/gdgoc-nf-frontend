@@ -66,6 +66,9 @@ function App() {
     // setTasks(newTasks);
 
     setTasks(tasks.filter((_, i) => i !== index));
+    tabs[0].count = tasks.length - 1;
+    tabs[1].count = tasks.filter((task) => !task.completed).length - 1;
+    tabs[2].count = tasks.filter((task) => task.completed).length - 1;
   }
 
   return (
