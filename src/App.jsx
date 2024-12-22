@@ -14,7 +14,7 @@ function App() {
     year: "numeric",
   });
 
-  const tabs = [
+  const [tabs, setTabs] = useState([
     {
       status: "semua",
       label: "Semua",
@@ -30,7 +30,7 @@ function App() {
       label: "Selesai",
       count: 2,
     },
-  ];
+  ]);
 
   const [tabCurrent, setTabCurrent] = useState("semua");
   const [tasks, setTasks] = useState([
@@ -47,6 +47,8 @@ function App() {
     const newTasks = [...tasks, { title: task, completed: false }];
     setTasks(newTasks);
 
+    tabs[0].count = newTasks.length;
+
     input.value = "";
   }
 
@@ -54,6 +56,8 @@ function App() {
     const newTasks = [...tasks];
     newTasks[index].completed = !newTasks[index].completed;
     setTasks(newTasks);
+    tabs[1].count = newTasks.filter((task) => !task.completed).length;
+    tabs[2].count = newTasks.filter((task) => task.completed).length;
   }
 
   function deleteTask(index) {
