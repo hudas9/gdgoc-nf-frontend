@@ -18,17 +18,17 @@ function App() {
     {
       status: "semua",
       label: "Semua",
-      count: 0,
+      count: 3,
     },
     {
       status: "open",
       label: "Belum Selesai",
-      count: 0,
+      count: 1,
     },
     {
       status: "closed",
       label: "Selesai",
-      count: 0,
+      count: 2,
     },
   ];
 
