@@ -36,7 +36,7 @@ function App() {
   const [tasks, setTasks] = useState([
     { title: "Belajar React", completed: true },
     { title: "Belajar Tailwind CSS", completed: true },
-    { title: "Belajar melupakannya", completed: false },
+    { title: "Belajar lagi", completed: false },
   ]);
 
   function addTask(e) {
