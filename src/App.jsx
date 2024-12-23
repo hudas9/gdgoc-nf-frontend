@@ -24,14 +24,14 @@ function App() {
     const closedCount = tasks.filter((task) => task.completed).length;
 
     return [
-      { status: "semua", label: "Semua", count: allCount },
-      { status: "open", label: "Belum Selesai", count: openCount },
-      { status: "closed", label: "Selesai", count: closedCount },
+      { status: "all", label: "All", count: allCount },
+      { status: "open", label: "Uncomplete", count: openCount },
+      { status: "closed", label: "Complete", count: closedCount },
     ];
   };
 
   const [tabs, setTabs] = useState(calculateTabCounts());
-  const [tabCurrent, setTabCurrent] = useState("semua");
+  const [tabCurrent, setTabCurrent] = useState("all");
 
   function updateTabs(newTasks) {
     const allCount = newTasks.length;
@@ -39,9 +39,9 @@ function App() {
     const closedCount = newTasks.filter((task) => task.completed).length;
 
     setTabs([
-      { status: "semua", label: "Semua", count: allCount },
-      { status: "open", label: "Belum Selesai", count: openCount },
-      { status: "closed", label: "Selesai", count: closedCount },
+      { status: "all", label: "All", count: allCount },
+      { status: "open", label: "Uncomplete", count: openCount },
+      { status: "closed", label: "Complete", count: closedCount },
     ]);
   }
 
@@ -61,8 +61,16 @@ function App() {
   }
 
   function toggleTask(index) {
+    const filteredTasks = tasks.filter((task) =>
+      tabCurrent === "all"
+        ? true
+        : tabCurrent === "open"
+        ? !task.completed
+        : task.completed
+    );
+    const taskIndex = tasks.indexOf(filteredTasks[index]);
     const newTasks = [...tasks];
-    newTasks[index].completed = !newTasks[index].completed;
+    newTasks[taskIndex].completed = !newTasks[taskIndex].completed;
     setTasks(newTasks);
     updateTabs(newTasks);
   }
@@ -87,9 +95,9 @@ function App() {
           <input
             type="text"
             className="border rounded-md px-2 py-1 focus:outline-none focus:border-blue-500 w-full"
-            placeholder="Tambahkan tugas baru"
+            placeholder="Add new task..."
             name="task"
-            autocomplete="off"
+            autoComplete="off"
           />
           <Button>Add Task</Button>
         </form>
@@ -108,7 +116,7 @@ function App() {
         <div>
           {tasks
             .filter((task) =>
-              tabCurrent === "semua"
+              tabCurrent === "all"
                 ? true
                 : tabCurrent === "open"
                 ? !task.completed
