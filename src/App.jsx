@@ -89,6 +89,7 @@ function App() {
             className="border rounded-md px-2 py-1 focus:outline-none focus:border-blue-500 w-full"
             placeholder="Tambahkan tugas baru"
             name="task"
+            autocomplete="off"
           />
           <Button>Add Task</Button>
         </form>
