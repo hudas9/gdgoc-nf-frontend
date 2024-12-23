@@ -87,15 +87,15 @@ function App() {
   }
 
   return (
-    <div className="flex items-center justify-center mt-10">
-      <div className="w-full max-w-md">
-        <h1 className="text-xl font-bold text-center">Tugas Saya</h1>
-        <p className="mb-5 text-center">{date}</p>
+    <div className="flex items-center justify-center mt-10 px-4">
+      <div className="w-full max-w-lg">
+        <h1 className="text-2xl font-bold text-center mb-4">My Task</h1>
+        <p className="mb-5 text-center text-gray-500">{date}</p>
 
         <form className="space-x-2 mb-3 flex" onSubmit={addTask}>
           <input
             type="text"
-            className="border rounded-md px-2 py-1 focus:outline-none focus:border-blue-500 w-full"
+            className="border rounded-md px-4 py-2 focus:outline-none focus:border-blue-500 w-full"
             placeholder="Add new task..."
             name="task"
             autoComplete="off"
@@ -103,7 +103,7 @@ function App() {
           <Button>Add Task</Button>
         </form>
 
-        <div className="flex space-x-4 justify-center mb-3">
+        <div className="flex space-x-2 justify-center mb-3 flex-wrap">
           {tabs.map((tab, index) => (
             <Tab
               key={index}
