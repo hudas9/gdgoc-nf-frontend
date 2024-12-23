@@ -15,7 +15,7 @@ function App() {
   const [tasks, setTasks] = useState([
     { title: "Belajar React", completed: true },
     { title: "Belajar Tailwind CSS", completed: true },
-    { title: "Belajar melupakannya", completed: false },
+    { title: "Belajar lagi", completed: false },
   ]);
 
   const calculateTabCounts = () => {
@@ -24,15 +24,14 @@ function App() {
     const closedCount = tasks.filter((task) => task.completed).length;
 
     return [
-      { status: "all", label: "All", count: allCount },
-      { status: "open", label: "Uncomplete", count: openCount },
-      { status: "closed", label: "Complete", count: closedCount },
+      { status: "semua", label: "Semua", count: allCount },
+      { status: "open", label: "Belum Selesai", count: openCount },
+      { status: "closed", label: "Selesai", count: closedCount },
     ];
   };
 
   const [tabs, setTabs] = useState(calculateTabCounts());
-
-  const [tabCurrent, setTabCurrent] = useState("all");
+  const [tabCurrent, setTabCurrent] = useState("semua");
 
   function updateTabs(newTasks) {
     const allCount = newTasks.length;
@@ -40,16 +39,16 @@ function App() {
     const closedCount = newTasks.filter((task) => task.completed).length;
 
     setTabs([
-      { status: "all", label: "All", count: allCount },
-      { status: "open", label: "Uncomplete", count: openCount },
-      { status: "closed", label: "Complete", count: closedCount },
+      { status: "semua", label: "Semua", count: allCount },
+      { status: "open", label: "Belum Selesai", count: openCount },
+      { status: "closed", label: "Selesai", count: closedCount },
     ]);
   }
 
   function addTask(e) {
     e.preventDefault();
     const input = e.currentTarget.elements.namedItem("task");
-    const task = input.value;
+    const task = input.value.trim();
 
     if (task === "") {
       return;
@@ -69,9 +68,9 @@ function App() {
   }
 
   function deleteTask(index) {
-    const newTask = tasks.filter((_, i) => i !== index);
-    setTasks(newTask);
-    updateTabs(newTask);
+    const newTasks = tasks.filter((_, i) => i !== index);
+    setTasks(newTasks);
+    updateTabs(newTasks);
   }
 
   function changeTab(status) {
@@ -79,18 +78,17 @@ function App() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center mt-10">
       <div className="w-full max-w-md">
-        <h1 className="text-xl font-bold text-center">My Task</h1>
+        <h1 className="text-xl font-bold text-center">Tugas Saya</h1>
         <p className="mb-5 text-center">{date}</p>
 
         <form className="space-x-2 mb-3 flex" onSubmit={addTask}>
           <input
             type="text"
             className="border rounded-md px-2 py-1 focus:outline-none focus:border-blue-500 w-full"
-            placeholder="Add new task..."
+            placeholder="Tambahkan tugas baru"
             name="task"
-            autoComplete="off"
           />
           <Button>Add Task</Button>
         </form>
@@ -109,7 +107,7 @@ function App() {
         <div>
           {tasks
             .filter((task) =>
-              tabCurrent === "all"
+              tabCurrent === "semua"
                 ? true
                 : tabCurrent === "open"
                 ? !task.completed
